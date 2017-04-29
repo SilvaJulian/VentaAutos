@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'VentaDeAutos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Venta',
+        'NAME': #nombre basedatos'',
         'USER':'root',
-        'PASSWORD':'p0lisha90',
+        'PASSWORD':#contraseña'',
         'OPTIONS': {
           'autocommit': True,
         },
@@ -138,8 +138,8 @@ LOGIN_URL = '/cuenta/login/'
 LOGOUT_URL = '/cuenta/logout/'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'rosacartazzo@gmail.com'
-EMAIL_HOST_PASSWORD = 'carlossilva'
+EMAIL_HOST_USER = #email''
+EMAIL_HOST_PASSWORD = #contraseña''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'rosacartazzo@gmail.com'
+DEFAULT_FROM_EMAIL = #emaildefault''
