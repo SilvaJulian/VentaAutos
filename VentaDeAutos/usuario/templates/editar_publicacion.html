@@ -1,0 +1,31 @@
+{% extends 'base_editar.html' %}
+
+{% block title %}Editar Publicacion{% endblock %}
+
+{% block content %}
+    <h2 class="page-header">Editar publicacion</h2>
+<form action="" enctype="multipart/form-data" method="POST">
+	{% csrf_token %}
+	<table>
+	{{form.as_table}}
+	</table>
+
+<div class="row">
+	{% for fotos in fotos %}
+  	<div class="col-sm-4 col-lg-4 col-md-4">
+  		
+    	<a href="#" class="thumbnail">
+      	<img src="{{MEDIA_URL}}{{fotos.file}}" alt="{{fotos.file}}">
+    	</a>
+	<a href="{% url 'cuenta.editar_eliminar_foto' idfoto=fotos.id usuario=user.username %}"><td>BORRAR
+	</td></a>
+  	</div>
+  	{%endfor%}
+ </div>
+
+	<button type="submit" name="crear" value="">GUARDAR</button>
+	<button type="reset" name="resetear" value="">RESETEAR</button>
+	<a href="{% url 'cuenta.editar_mispublicaciones' usuario=user.username %}"><button type="button" name="volver" value="">ATRAS</button></a>
+</form>
+
+{% endblock content %}

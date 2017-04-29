@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+    {%block metasocial%}
+    {# twiiter cards share #}
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@SilvaJulian" />
+    <meta name="twitter:creator" content="@SilvaJulian" />
+    <meta name="twitter:title" content="Venta {{ autos.marca|capfirst }} {{ autos.version|capfirst }}" />
+    <meta name="twitter:description" content="{{ autos.marca|capfirst }} {{ autos.version|capfirst }}" />
+    <meta name="twitter:image" content="{{MEDIA_URL}}{{foto_socialmedia.file}}" />
+    <meta name="twitter:url" content="http://127.0.0.1:8000{{ request.get_full_path }}" />
+
+    {# facebook share #}
+
+    <meta property="og:url"                content="http://127.0.0.1:8000{{ request.get_full_path }}" />
+    <meta property="og:type"               content="product.item" />
+    <meta property="og:title"              content="Venta: {{ autos.marca|capfirst }} {{ autos.version|capfirst }}" />
+    <meta property="og:description"        content="Nombre de la empresa" />
+    <meta property="og:image"              content="{{MEDIA_URL}}{{foto_socialmedia.file}}" />
+
+    {# google+ share #}
+    <meta itemprop="name" content="Venta {{ autos.marca|capfirst }} {{ autos.version|capfirst }}">
+    <meta itemprop="description" content="{{ autos.marca|capfirst }} {{ autos.version|capfirst }}">
+    <meta itemprop="image" content="{{MEDIA_URL}}{{foto_socialmedia.file}}" > 
+        
+    {%endblock%}
+    {%block estilos%}
+      <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+
+  }
+      </style>
+
+    {%endblock%}
+{% block title %}{{autos.marca|capfirst}} {{autos.version|capfirst}} - Detalles {% endblock %}
+{% block buscador %}
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+ <div class="thumbnail">
+ <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      {%for fotos in fotos%}
+        {%if forloop.first %}
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+       {% else %}
+            <li data-target="#myCarousel" data-slide-to=""></li>
+        {%endif%}
+      {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+
+    <div class="carousel-inner" role="listbox">
+          {%for fotos in fotos%}
+            {%if forloop.first %}
+              <div class="item active">
+                  <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox">
+                      <img src="{{MEDIA_URL}}{{fotos.file}}" alt="{{fotos.file}}" width="460" height="345">
+                  </a>
+              </div>
+            {%else%}
+              <div class="item">
+                  <a href="#" class="thumbnail" data-toggle="modal" data-target="#lightbox">
+                      <img src="{{MEDIA_URL}}{{fotos.file}}" alt="{{fotos.file}}" width="460" height="345">
+                  </a>
+              </div>
+            {%endif %}
+          {%endfor%}
+    </div>
+
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+        <div class="caption">
+            <h3 class="pull-right">$ {{ autos.precio }}</h3>
+            <h3><a href=#>{{ autos.marca|capfirst }} {{ autos.version|capfirst }}</a></h3>
+            <p>Nombre y Apellido:{{usuario_perfil.first_name|capfirst}} {{usuario_perfil.last_name|capfirst}} </p>
+            <p>Telefono:{{ auto_usuario.telefono}}</p>
+            <p>Celular:{{ auto_usuario.celular }}</p>
+            <p>Direccion:{{ auto_usuario.direccion|capfirst }}</p>
+            <p>Version: {{ autos.version|capfirst}}</p>
+            <p>Km:{{ autos.kilometraje}}</p>
+            <p>Año de fabricacion: {{ autos.fabricacion}}</p>
+            <div class="row" >
+            <div class="col-md-9">
+            <p>Tipo de combistible: {{ autos.combustible|capfirst}}</p>
+            </div>
+            <div class="col-md-3">
+                      <ul class="social-network social-circle">
+                          
+                          <li><a href="http://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:8000{{ request.get_full_path }}" class="icoFacebook" title="Facebook"><i class="fa fa-facebook" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" ></i></a></li>
+                          
+                          
+                          <li><a href="https://twitter.com/intent/tweet?text=Se vende:{{ autos.marca|capfirst }} {{ autos.version|capfirst }} http://127.0.0.1:8000{{ request.get_full_path }}" class="icoTwitter" title="Twitter"><i class="fa fa-twitter" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" ></i></a></li>
+                          
+                          
+                          <li><a href="https://plus.google.com/share?url=http://127.0.0.1:8000{{ request.get_full_path }}" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+
+                      </ul>       
+          </div>
+          </div>
+        </div>
+</div>
+    <!-- lightbox -->
+
+<div id="lightbox" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <button type="button" class="close hidden" data-dismiss="modal" aria-hidden="true">×</button>
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="" alt="" />
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

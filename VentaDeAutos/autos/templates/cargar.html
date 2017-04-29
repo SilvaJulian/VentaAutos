@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{%block estilos%}
+<style type="text/css">
+.thumb-image1{
+    float:left;width:300px;height: 200px;position:relative;padding:5px;}
+</style>
+{% endblock %}
+{% block title %}Carga Datos{% endblock %}
+
+{% block buscador %}
+{% endblock %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<hr>
+<div>
+<form action="" enctype="multipart/form-data" method="POST">
+	{% csrf_token %}
+  <fieldset>
+    <legend>Cargar auto</legend>
+    Marca:<br>
+    {{form.marca}}
+    <br>
+    Version:<br>
+    {{form.version}}<br>   
+    Kilometraje:<br>
+    {{form.kilometraje}}<br>
+    Combustible:<br>
+    {{form.combustible}}<br>
+    Precio:<br>
+    {{form.precio}}<br>
+    Fabricacion:<br>
+    {{form.fabricacion}}<br>
+    Telefono:<br>
+    {{form1.telefono}}<br>
+    Celular:<br>
+    {{form1.celular}}<br>
+    Direccion:<br>
+    {{form1.direccion}}<br>
+    Fotos:
+    <div id="wrapper" style="margin-top: 5px;">
+    {{form.attachments}} 
+    <div id="image-holder"></div>
+    </div>
+  </fieldset>
+	<button type="submit" name="crear" value="">CREAR</button>
+	<button type="reset" name="resetear" value="">RESETEAR</button>
+	<a href="/"><button type="button" name="volver" value="">ATRAS</button></a>
+</form>
+</div>
+
+{% endblock %}
+ {% block scripts %}
+ <script>
+$(document).ready(function() {
+        $("#id_attachments").on('change', function() {
+          //Get count of selected files
+          var countFiles = $(this)[0].files.length;
+          var imgPath = $(this)[0].value;
+          var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+          var image_holder = $("#image-holder");
+          image_holder.empty();
+          if (extn == "png" || extn == "jpg" || extn == "jpeg") {
+            if (typeof(FileReader) != "undefined") {
+              //loop for each file selected for uploaded.
+              for (var i = 0; i < countFiles; i++) 
+              {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                  $("<img />", {
+                    "src": e.target.result,
+                    "class": "thumb-image1"
+                  }).appendTo(image_holder);
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[i]);
+              }
+            } else {
+              alert("This browser does not support FileReader.");
+            }
+          } else {
+            alert("Pls select only images");
+          }
+        });
+      });
+</script>
+ {% endblock%}

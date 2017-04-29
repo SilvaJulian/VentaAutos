@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block navegador %}
+    <ul class="nav nav-tabs navbar-right">
+      <li role="presentation"><a href="{% url 'cuenta.index' usuario=user.username %}" >Editar datos personales</a>
+      </li>
+      <li role="presentation"><a href="{% url 'cuenta.editar_mail' usuario=user.username %}" >Editar email</a>
+      </li>
+      <li role="presentation"><a href="{% url 'cuenta.editar_password' usuario=user.username %}" >Editar contraseña</a>
+      </li>
+      <li role="presentation"><a href="{% url 'cuenta.editar_mispublicaciones' usuario=user.username %}" >Editar publicacion</a>
+      </li>
+    </ul>
+{% endblock navegador %}

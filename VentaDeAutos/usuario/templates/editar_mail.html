@@ -1,0 +1,21 @@
+
+{% extends 'base_editar.html' %}
+
+{% block title %}Editar email{% endblock title %}
+{# revisar error de alerta #}
+{% block content %}
+    <h2 class="page-header">Editar Email</h2>
+            {% if form.errors %}
+                        <div class="alert alert-danger">
+                                {{ form.as_text }}
+                        </div>
+
+            {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Actualizar Email</button>
+        <button class="btn btn-primary" type="reset">Limpiar</button>
+        <a href="{% url 'cuenta.index' usuario=user.username %}" class="btn btn-warning" type="submit">Cancelar</a>
+    </form>
+{% endblock content %}

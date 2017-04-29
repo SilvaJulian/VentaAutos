@@ -1,0 +1,29 @@
+{% extends 'base_editar.html' %}
+
+{% block content %}
+<div class="page-header"><h2><h2>Mis publicaciones</h2></div>
+
+<table style="width:100%;border:1px solid black">
+  <tr>
+    <th>Marca</th>
+    <th>Version</th>
+    <th>KM</th>
+    <th>Fabricacion</th>
+    <th>Combustible</th>
+    <th>Precio</th>
+  </tr>
+   {% for autos in autos %}
+  <tr>
+    <td><a href="{% url 'auto.detalles' idauto=autos.id %}">{{ autos.marca }}</a></td>
+    <td>{{ autos.version}}</td>
+    <td>{{ autos.kilometraje}}</td>
+    <td>{{ autos.fabricacion}}</td>
+    <td>{{ autos.combustible}}</td>
+    <td>{{ autos.precio }}</td>
+    <td><a href="{% url 'cuenta.editar_publicacion' idauto=autos.id usuario=user.username %}">Editar</td>
+    <td><a href="{% url 'cuenta.editar_eliminar_auto' idauto=autos.id usuario=user.username %}">Eliminar</td>
+  </tr>
+    {% endfor %}
+</table>
+</div>
+{% endblock content %}

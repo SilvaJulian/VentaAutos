@@ -1,0 +1,27 @@
+{% extends 'base_editar.html' %}
+{% block content %}
+<div>		 
+    <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}    
+  <fieldset>
+        <h2 class="page-header">Datos personales</h2>
+	<img class="img-thumbnail" src="{{MEDIA_URL}}{{avatar}}" alt="{{avatar}}" width="140" height="140"><br>
+    Nombre:<br>
+    {{form1.first_name}}<br>   
+    Apellido:<br>
+    {{form1.last_name}}<br>
+    Direccion:<br>
+    {{form.direccion}}<br>
+    Telefono (Ej.:03414629160 o 4629160):<br>
+    {{form.telefono}}<br>
+    Celular (Ej.:3413354287 o 153354287):<br>
+    {{form.celular}}<br>
+    Avatar:<br>
+    {{form.avatar}}<br>
+  </fieldset>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+</div>
+
+{% endblock content %}

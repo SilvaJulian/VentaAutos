@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Recuperar Contraseña{% endblock title %}
+{% block buscador %}
+{% endblock %}
+{% block content %}
+<br>
+<br>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if 'success' in message.tags %}
+                        <div class="alert alert-success">
+                                {{ message }}
+                        </div>
+                    {%else%}
+                        <div class="alert alert-danger">
+                                {{ message }}
+                        </div>
+                    {%endif%}
+                {% endfor %}
+            {% endif %}
+<form method="post" action="">
+        {% csrf_token %}
+<fieldset>
+<legend>Recuperar contraseña</legend>
+    
+    Contraseña:<br>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"><br>
+
+    Repetir contraseña:<br>
+    <input type="password" class="form-control" id="password2" name="password2" placeholder="Repetir contraseña"><br>
+<br>
+  </fieldset>
+        <button class="btn btn-primary" type="submit">Actualizar Contraseña</button>
+    </form>
+{% endblock content %}

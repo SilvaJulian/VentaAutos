@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Estas buscado: {{ query }}{% endblock %}
+
+{% block content %}
+<div>
+{% if autos %}
+    <h4><p>Autos encontrados: {{ autos|length }} auto{{ autos|pluralize }}.</p></h4>
+</div>
+<div>
+    {% if errors %}
+        <ul>
+            {% for errors in errors %}
+            <li style="color: red;">{{ errors }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+    <div class="container marketing">
+        <div class="row" >
+            {% for fotos in fotos %}
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <a href="/auto/detalles/{{fotos.auto.id}}">
+                <div class="thumbnail">
+                    <img class="img-thumbnail" src="{{MEDIA_URL}}{{fotos.file}}" alt="{{fotos.file}}" width="320" height="150">
+                        <div class="caption">
+                            <h4 class="pull-right">${{fotos.auto.precio }}</h4>
+                            <h4><a href=href="/auto/detalles/{{fotos.auto.id}}">{{fotos.auto.marca}}</a></h4>
+                            <p>{{ fotos.auto.marca }} {{ fotos.auto.version}}, {{ fotos.auto.kilometraje}} Km, Año:{{ fotos.auto.fabricacion }}</p></a>       
+                        </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+
+{% else %}
+    <p>Ningún auto coincide con el criterio de búsqueda.</p>
+{% endif %}
+{% endblock %}
+

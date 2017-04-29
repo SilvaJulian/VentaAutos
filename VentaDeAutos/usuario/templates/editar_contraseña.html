@@ -1,0 +1,21 @@
+
+{% extends 'base_editar.html' %}
+
+{% block title %}Editar Contraseña{% endblock title %}
+{% block content %}
+	{% if errors %}
+        <ul>
+            {% for errors in errors %}
+            <li style="color: red;">{{ errors }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2 class="page-header">Editar contraseña</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Actualizar Contraseña</button>
+        <button class="btn btn-primary" type="reset">Limpiar</button>
+        <a href="{% url 'cuenta.index' usuario=user.username %}" class="btn btn-warning" type="submit">Cancelar</a>
+    </form>
+{% endblock content %}
